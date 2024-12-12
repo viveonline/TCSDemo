@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generador de Imágenes con DALL·E Para TCS</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Generador de Imágenes con DALL·E para TCS</h1>
+        <p>Escribe una descripción para generar una imagen única:</p>
+        <input type="text" id="description" placeholder="Describe la imagen..." />
+        <button onclick="generateImage()">Generar Imagen</button>
+        <div id="output">
+            <p id="status"></p>
+            <img id="resultImage" alt="La imagen generada aparecerá aquí." />
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
