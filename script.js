@@ -7,7 +7,7 @@ async function generateImage() {
     resultImage.src = "";
 
     try {
-        const response = await fetch("https://demoimage.openai.azure.com/openai/dalle/text-to-image", {
+        const response = await fetch("https://demoimage.openai.azure.com/openai/deployments/dall-e-3TCS/images/generations?api-version=2024-02-01", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
