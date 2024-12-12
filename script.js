@@ -1,7 +1,7 @@
 async function generateImage() {
     const description = document.getElementById("description").value;
     const status = document.getElementById("status");
-    const resultImage = document.getElementById("resultImage");
+   
 
     status.textContent = "Generando imagen...";
     resultImage.src = "";
@@ -20,39 +20,42 @@ async function generateImage() {
             const data = await response.json();
             const imageUrl = data.result.data[0].url;
 
-            // Abre una nueva pestaña con la imagen generada
-            const newWindow = window.open();
-            newWindow.document.write(`
-                <html>
-                <head>
-                    <title>Imagen Generada</title>
-                    <style>
-                        body {
-                            display: flex;
-                            justify-content: center;
-                            align-items: center;
-                            height: 100vh;
-                            margin: 0;
-                            background-color: #f4f4f4;
-                        }
-                        img {
-                            max-width: 90%;
-                            max-height: 90%;
-                            border: 1px solid #ccc;
-                            border-radius: 10px;
-                        }
-                    </style>
-                </head>
-                <body>
-                    <img src="${imageUrl}" alt="Imagen generada por DALL·E">
-                </body>
-                </html>
-            `);
-            status.textContent = "";
+            if (imageUrl) {
+                const newWindow = window.open();
+                newWindow.document.write(`
+                    <html>
+                    <head>
+                        <title>Imagen Generada</title>
+                        <style>
+                            body {
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
+                                height: 100vh;
+                                margin: 0;
+                                background-color: #f4f4f4;
+                            }
+                            img {
+                                max-width: 90%;
+                                max-height: 90%;
+                                border: 1px solid #ccc;
+                                border-radius: 10px;
+                            }
+                        </style>
+                    </head>
+                    <body>
+                        <img src="${imageUrl}" alt="Imagen generada por DALL·E">
+                    </body>
+                    </html>
+                `);
+            } else {
+                status.textContent = "No se generó ninguna imagen.";
+            }
         } else {
-            status.textContent = "Error al generar la imagen.";
+            status.textContent = `Error: ${response.status} - ${response.statusText}`;
         }
     } catch (error) {
-        status.textContent = "Error en la conexión.";
+        status.textContent = "Error en la conexión. Verifica tu configuración.";
+        console.error(error);
     }
 }
