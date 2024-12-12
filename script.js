@@ -18,7 +18,36 @@ async function generateImage() {
 
         if (response.ok) {
             const data = await response.json();
-            resultImage.src = data.url;
+            const imageUrl = data.result.data[0].url;
+
+            // Abre una nueva pestaña con la imagen generada
+            const newWindow = window.open();
+            newWindow.document.write(`
+                <html>
+                <head>
+                    <title>Imagen Generada</title>
+                    <style>
+                        body {
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            height: 100vh;
+                            margin: 0;
+                            background-color: #f4f4f4;
+                        }
+                        img {
+                            max-width: 90%;
+                            max-height: 90%;
+                            border: 1px solid #ccc;
+                            border-radius: 10px;
+                        }
+                    </style>
+                </head>
+                <body>
+                    <img src="${imageUrl}" alt="Imagen generada por DALL·E">
+                </body>
+                </html>
+            `);
             status.textContent = "";
         } else {
             status.textContent = "Error al generar la imagen.";
