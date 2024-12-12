@@ -4,7 +4,7 @@ async function generateImage() {
    
 
     status.textContent = "Generando imagen...";
-    resultImage.src = "";
+   
 
     try {
         const response = await fetch("https://demoimage.openai.azure.com/openai/deployments/dall-e-3TCS/images/generations?api-version=2024-02-01", {
